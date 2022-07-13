@@ -1,0 +1,39 @@
+.nav {
+  position: relative;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+}
+
+.list {
+  position: absolute;
+  display: flex;
+  height: 32px;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.category {
+  font-family: 'Rubik';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  &:not(:last-child) {
+    margin-right: 16px;
+  }
+}
+.item {
+  color: #777777;
+  padding: 6px 12px;
+}
+
+.active {
+  composes: item;
+  color: #fff;
+  font-weight: 700;
+  background-color: #a6192e;
+}
