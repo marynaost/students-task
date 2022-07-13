@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { headerRoutes } from 'routes/headerRouters'
 import UserIcon from '../UserIcon/UserIcon'
 import LogoSchool from '../LogoSchool/LogoSchool'
+import BottomNavigation from 'components/BottomNavigation/BottomNavigation'
 import s from './Navigation.module.scss'
 
 export default function Navigation() {
@@ -23,6 +24,7 @@ export default function Navigation() {
         </ul>
         <UserIcon />
       </nav>
+      <BottomNavigation />
       <Outlet />
     </>
   )

@@ -1,0 +1,45 @@
+.wrap {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: #5b5b5b;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+}
+
+.button {
+  font-family: 'Rubik';
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #c0c0c0;
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  padding: 6px 12px;
+}
+
+.buttonClear {
+  composes: button;
+  font-weight: 700;
+  padding: 7px 0px;
+}
+
+.icon {
+  margin-left: 4px;
+}
+
+.iconClear {
+  margin-right: 6px;
+}

@@ -12,26 +12,26 @@ import './App.css'
 
 export default function App() {
   return (
-    <div
-      style={{
-        maxWidth: '1440px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        paddingLeft: '40px',
-        paddingRight: '40px',
-      }}
-    >
-      <Routes>
-        <Route path="/" element={<Navigation />}>
-          <Route index element={<Navigate to="/students" />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="gradebooks" element={<Gradebooks />} />
-          <Route path="tests" element={<Tests />} />
-          <Route path="students" element={<Students />} />
-          <Route path="teachers" element={<Teachers />} />
-          <Route path="archive" element={<Archive />} />
-        </Route>
-      </Routes>
-    </div>
+    // <div
+    //   style={{
+    //     maxWidth: '1440px',
+    //     marginLeft: 'auto',
+    //     marginRight: 'auto',
+    //     paddingLeft: '40px',
+    //     paddingRight: '40px',
+    //   }}
+    // >
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Navigate to="/students" />} />
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="gradebooks" element={<Gradebooks />} />
+        <Route path="tests" element={<Tests />} />
+        <Route path="students" element={<Students />} />
+        <Route path="teachers" element={<Teachers />} />
+        <Route path="archive" element={<Archive />} />
+      </Route>
+    </Routes>
+    // </div>
   )
 }
