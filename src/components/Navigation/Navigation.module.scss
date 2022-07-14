@@ -20,17 +20,17 @@
 }
 
 .category {
-  font-family: 'Rubik';
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.4;
+  // font-family: 'Rubik';
+  // font-weight: 400;
+  // font-size: 14px;
+  // line-height: 1.4;
   text-transform: uppercase;
   &:not(:last-child) {
     margin-right: 16px;
   }
 }
 .item {
-  color: #777777;
+  color: inherit;
   padding: 6px 12px;
 }
 

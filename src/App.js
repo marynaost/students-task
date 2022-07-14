@@ -9,6 +9,7 @@ import Teachers from 'pages/Teachers'
 import Tests from 'pages/Tests'
 import 'modern-normalize/modern-normalize.css'
 import './App.css'
+import './index.css'
 
 export default function App() {
   return (

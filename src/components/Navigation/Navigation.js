@@ -3,6 +3,8 @@ import { headerRoutes } from 'routes/headerRouters'
 import UserIcon from '../UserIcon/UserIcon'
 import LogoSchool from '../LogoSchool/LogoSchool'
 import BottomNavigation from 'components/BottomNavigation/BottomNavigation'
+// import Filter from 'components/Filter/Filter'
+import Headline from 'components/Headline/Headline'
 import s from './Navigation.module.scss'
 
 export default function Navigation() {
@@ -25,6 +27,8 @@ export default function Navigation() {
         <UserIcon />
       </nav>
       <BottomNavigation />
+      {/* <Filter /> */}
+      <Headline />
       <Outlet />
     </>
   )

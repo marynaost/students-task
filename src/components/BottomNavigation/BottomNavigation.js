@@ -7,7 +7,7 @@ export default function BottomNavigation(params) {
     <div className={s.wrap}>
       <ul className={s.list}>
         {Data.map(data => (
-          <li className={s.item}>
+          <li className={s.item} key={data.value}>
             <button className={s.button}>
               {data.value}
               <Icon
