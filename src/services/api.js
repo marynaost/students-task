@@ -8,8 +8,9 @@ async function fetchStudents(url = '', config = {}) {
 }
 
 export function fetchStudentsData(page, size) {
-  // if (!page) {
-  //   page = 1
-  // }
   return fetchStudents(`${BASE_URL}?page=${page}&size=${size}`)
+}
+
+export function fetchAllStudents() {
+  return fetchStudents(`${BASE_URL}?page=1&size=20`)
 }

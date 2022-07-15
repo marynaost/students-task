@@ -1,11 +1,11 @@
 import Filter from 'components/Filter/Filter'
 import Icon from 'components/Icon'
 import s from './Headline.module.scss'
-export default function Headline(params) {
+export default function Headline({ filter, changeFilter }) {
   return (
     <div className={s.headlineWrap}>
       <h2>Students</h2>
-      <Filter />
+      <Filter search={filter} onChange={changeFilter} />
       <button type="button" className={s.button}>
         <Icon
           className={s.icon}
