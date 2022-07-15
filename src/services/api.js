@@ -7,6 +7,9 @@ async function fetchStudents(url = '', config = {}) {
     : Promise.reject(new Error('Not Found'))
 }
 
-export function fetchStudentsData() {
-  return fetchStudents(`${BASE_URL}`)
+export function fetchStudentsData(page, size) {
+  // if (!page) {
+  //   page = 1
+  // }
+  return fetchStudents(`${BASE_URL}?page=${page}&size=${size}`)
 }

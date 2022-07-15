@@ -1,3 +1,4 @@
-export default function Students(params) {
-  return <h2>Students Page</h2>
+import Students from 'components/Students/Students'
+export default function StudentsPage(params) {
+  return <Students />
 }

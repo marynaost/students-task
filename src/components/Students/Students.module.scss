@@ -1,0 +1,43 @@
+.container {
+  max-width: 1440px;
+  padding: 0 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+// .thead {
+//   padding: 12px 19px 12px 21px;
+// }
+.table {
+  width: 100%;
+}
+.tbody {
+  border-radius: 4px;
+  box-shadow: 0px 1px 4px rgba(60, 52, 135, 0.15);
+  border-bottom: 2px solid rgb(192, 192, 192);
+}
+
+.th {
+  text-align: left;
+}
+.td {
+  border: none;
+}
+
+.tr {
+  height: 48px;
+  border-spacing: 0;
+  &:nth-child(odd) {
+    background: #ffffff;
+  }
+  &:nth-child(even) {
+    background: #f9f9f9;
+    box-shadow: 0px 1px 4px rgba(60, 52, 135, 0.15);
+  }
+}
+.button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}

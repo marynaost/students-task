@@ -1,8 +1,11 @@
 .headlineWrap {
+  max-width: 1440px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 40px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .button {
