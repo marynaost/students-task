@@ -10,6 +10,9 @@ export default function StudentTestsData({
   date,
   absent,
 }) {
+  const onChange = () => {
+    console.log('onChange')
+  }
   return (
     <tr className={s.tr}>
       <td className={s.td} style={{ color: absent ? '#C0C0C0' : '#777777' }}>
@@ -37,7 +40,7 @@ export default function StudentTestsData({
         <span>{date}</span>
       </td>
       <td className={s.td}>
-        <input type="checkbox" checked={absent} />
+        <input type="checkbox" checked={absent} onChange={onChange} />
       </td>
     </tr>
   )

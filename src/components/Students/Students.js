@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
-import { nanoid } from 'nanoid'
 import * as API from 'services/api'
-import StudentInfo from './StudentInfo'
 import Headline from 'components/Headline/Headline'
 import s from './Students.module.scss'
-// import Icon from 'components/Icon'
-
+import SortableTable from './SortableTable'
 import TablePagination from '@mui/material/TablePagination'
 
 export default function Students() {
@@ -15,11 +12,8 @@ export default function Students() {
   const [size, setSize] = useState(5)
   const [totalCount, setTotalCount] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
-  const [checked, setChecked] = useState(false)
-  const [sort, setSort] = useState(false)
-  const [test, setTest] = useState(false)
+  const [selected, setSelected] = useState(false)
   const [filter, setFilter] = useState('')
-  const [allStudent, setAllStudent] = useState([])
 
   useEffect(() => {
     API.fetchStudentsData(page, size)
@@ -47,14 +41,7 @@ export default function Students() {
   }
 
   const changeCheckbox = () => {
-    setChecked(!checked)
-  }
-
-  const handleClick = () => {
-    setSort(!sort)
-  }
-  const onDetailsClick = () => {
-    setTest(!test)
+    setSelected(!selected)
   }
 
   const handleChangePage = (e, newPage) => {
@@ -76,49 +63,12 @@ export default function Students() {
       <Headline changeFilter={changeFilter} filter={filter} />
       {studentsFiltered.length > 0 ? (
         <>
-          <table className={s.table}>
-            <thead className={s.thead}>
-              <tr className={s.tr}>
-                <th className={s.th} style={{ paddingLeft: '20px' }}>
-                  <input
-                    type="checkbox"
-                    name="check"
-                    checked={checked}
-                    onChange={changeCheckbox}
-                  />
-                </th>
-                <th className={s.th}>
-                  <span className={s.name}>Name</span>
-                  {/* <button onClick={handleClick}></button> */}
-                </th>
-                <th className={s.th}>
-                  <span>ID</span>
-                </th>
-                <th className={s.th}>Class</th>
-                <th className={s.th}>
-                  <span> Av.Score, %</span>
-                </th>
-                <th className={s.th}>
-                  <span>Av.Speed</span>
-                </th>
-                <th className={s.th}>Parents</th>
-                <th className={s.th}>Actions</th>
-              </tr>
-            </thead>
-            <tbody className={s.tbody}>
-              {studentsFiltered &&
-                studentsFiltered.map(student => (
-                  <StudentInfo
-                    key={nanoid()}
-                    changeCheckbox={changeCheckbox}
-                    checked={checked}
-                    tests={student.tests}
-                    {...student}
-                  />
-                ))}
-            </tbody>
-          </table>
-
+          <SortableTable
+            studentsFiltered={studentsFiltered}
+            changeCheckbox={changeCheckbox}
+            checked={selected}
+            things={studentsFiltered}
+          />
           <TablePagination
             style={{
               display: 'flex',
@@ -135,7 +85,7 @@ export default function Students() {
           />
         </>
       ) : (
-        <h3 style={{ textAlign: 'center' }}> Sorry! This student not found</h3>
+        <h3 style={{ textAlign: 'center' }}> Sorry! Students not found</h3>
       )}
     </div>
   )

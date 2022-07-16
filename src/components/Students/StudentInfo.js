@@ -10,10 +10,13 @@ export default function StudentInfo({
   score,
   speed,
   parents,
-  checked,
-  changeCheckbox,
 }) {
   const [showInfo, setShowInfo] = useState(false)
+  const [select, setSelect] = useState(false)
+
+  const changeCheckbox = e => {
+    setSelect(!select)
+  }
 
   return (
     <>
@@ -22,7 +25,7 @@ export default function StudentInfo({
           <input
             type="checkbox"
             name="check"
-            checked={checked}
+            checked={select}
             onChange={changeCheckbox}
           />
         </td>
@@ -79,8 +82,6 @@ export default function StudentInfo({
               iconName={
                 !showInfo ? 'icon-arrow_drop_down' : 'icon-arrow_drop_up'
               }
-              //   iconName="icon-arrow_drop_down"
-              //   arrow_drop_up
             />
           </button>
         </td>
