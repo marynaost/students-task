@@ -3,8 +3,17 @@ import s from './Students.module.scss'
 import { nanoid } from 'nanoid'
 import StudentInfo from './StudentInfo'
 import sortTableData from 'helpers/sortTableData'
-export default function SortableTable({ checked, changeCheckbox, things }) {
+import ArchivedTable from './ArchivedTable'
+export default function SortableTable({
+  checked,
+  changeCheckbox,
+  things,
+  toggleSelectStudent,
+  archivedStudents,
+  cancelArchive,
+}) {
   const [sortedItems, setSortedItems] = useState(things)
+  const [checkedbutton, setCheckedbutton] = useState(false)
   const [direction, setDirection] = useState('ascending')
   const [sortby, setSortby] = useState()
 
@@ -14,6 +23,10 @@ export default function SortableTable({ checked, changeCheckbox, things }) {
     setSortby(event.target.id)
     const sortConfig = { sortby: event.target.id, direction: sortDir }
     setSortedItems(sortTableData(things, sortConfig))
+  }
+
+  const showButtons = () => {
+    setCheckedbutton(!checkedbutton)
   }
 
   return (
@@ -68,14 +81,30 @@ export default function SortableTable({ checked, changeCheckbox, things }) {
             Av.Speed
           </th>
           <th className={s.th}>Parents</th>
-          <th className={s.th}>Actions</th>
+          <th className={s.th} style={{ width: '133px' }}>
+            Actions
+          </th>
         </tr>
       </thead>
       <tbody className={s.tbody}>
         {things &&
           things.map(student => (
-            <StudentInfo key={nanoid()} tests={student.tests} {...student} />
+            <StudentInfo
+              key={nanoid()}
+              tests={student.tests}
+              {...student}
+              index={student.id}
+              toggleSelectStudent={toggleSelectStudent}
+              showButtons={showButtons}
+              checkedbutton={false}
+            ></StudentInfo>
           ))}
+        {archivedStudents.length > 0 ? (
+          <ArchivedTable
+            archivedStudents={archivedStudents}
+            cancelArchive={cancelArchive}
+          />
+        ) : null}
       </tbody>
     </table>
   )

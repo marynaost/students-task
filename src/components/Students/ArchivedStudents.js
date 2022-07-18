@@ -1,39 +1,31 @@
 import { useState } from 'react'
 import Icon from 'components/Icon'
-import TestDetail from 'components/TestDetail/TestDetail'
 import s from './Students.module.scss'
-export default function StudentInfo({
+export default function ArchivedStudents({
   name,
-  tests,
   id,
   class: group,
   score,
   speed,
   parents,
-  toggleSelectStudent,
-  selected = false,
+  cancelArchive,
   index,
 }) {
   const [showInfo, setShowInfo] = useState(false)
+  const changeCheckbox = () => {}
 
-  const changeCheckbox = () => {
-    toggleSelectStudent(index, !selected)
+  const canselArchive = () => {
+    cancelArchive(index)
   }
 
   return (
     <>
-      <tr
-        className={s.tr}
-        style={{
-          background: selected && '#F2F2F2',
-          border: selected && '1px solid #C0C0C0',
-        }}
-      >
+      <tr className={s.tr} style={{ background: '#F9F9F9', color: '#C0C0C0' }}>
         <td className={s.td} style={{ paddingLeft: '20px' }}>
           <input
             type="checkbox"
             name="check"
-            checked={selected}
+            checked={false}
             onChange={changeCheckbox}
           />
         </td>
@@ -44,16 +36,7 @@ export default function StudentInfo({
         <td className={s.td}>
           <span
             style={{
-              color:
-                score < 50 + '%'
-                  ? '#DB4437'
-                  : score < 80 + '%'
-                  ? '#E2B534'
-                  : score < 90 + '%'
-                  ? '#0F9D58'
-                  : score >= 90 + '%'
-                  ? '#4285F4'
-                  : ' #828282',
+              color: '#C0C0C0',
             }}
           >
             {score}
@@ -62,14 +45,7 @@ export default function StudentInfo({
         <td className={s.td}>
           <span
             style={{
-              color:
-                speed === 'As Expected'
-                  ? '#0F9D58'
-                  : speed === 'Above Expected'
-                  ? '#4285F4'
-                  : speed === 'Below Expected'
-                  ? '#DB4437'
-                  : ' #828282',
+              color: '#C0C0C0',
             }}
           >
             {speed}
@@ -78,33 +54,15 @@ export default function StudentInfo({
         <td className={s.td}>{parents.join(', ')}</td>
         <td className={s.td} style={{ paddingRight: '20px' }}>
           <div style={{ display: 'flex', justifyContent: 'flex-end ' }}>
-            <button
-              type="button"
-              className={s.button}
-              onClick={() => setShowInfo(!showInfo)}
-            >
+            <button type="button" className={s.button} onClick={canselArchive}>
               <Icon
                 className={s.icon}
                 width="16px"
                 height="16px"
                 fill="#828282"
-                iconName="icon-create"
+                iconName="icon-unarchive"
               />
             </button>
-            <button
-              type="button"
-              className={s.button}
-              onClick={() => setShowInfo(!showInfo)}
-            >
-              <Icon
-                className={s.icon}
-                width="16px"
-                height="16px"
-                fill="#828282"
-                iconName="icon-trending_up"
-              />
-            </button>
-
             <button
               type="button"
               className={s.button}
@@ -126,16 +84,6 @@ export default function StudentInfo({
           </div>
         </td>
       </tr>
-
-      {showInfo ? (
-        <TestDetail
-          score={score}
-          speed={speed}
-          tests={tests}
-          name={name}
-          id={id}
-        />
-      ) : null}
     </>
   )
 }

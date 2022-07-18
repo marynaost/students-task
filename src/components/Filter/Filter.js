@@ -1,16 +1,15 @@
-// import { useSelector, useDispatch } from 'react-redux'
-// import { getFilter } from '../../redux/contacts/contacts-selectors'
-// import { changeFilter } from 'redux/contacts/contacts-actions'
+import { useSelector, useDispatch } from 'react-redux'
+import { changeFilter } from 'redux/selectSlice'
 import Icon from 'components/Icon'
 import s from './Filter.module.scss'
 
 export default function Filter({ search, onChange }) {
-  // const value = useSelector(getFilter)
-  // const dispatch = useDispatch()
+  const { filter } = useSelector(state => state.filter)
+  const dispatch = useDispatch()
 
+  console.log(filter)
   return (
     <div className={s.filterWrap}>
-      {/* <label className={s.label}> */}
       <input
         className={s.input}
         type="text"
@@ -18,12 +17,9 @@ export default function Filter({ search, onChange }) {
         placeholder="Enter Student Name, Parent or ID here"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        value={search}
-        // value={value}
-        // onChange={e => dispatch(changeFilter(e.target.value))}
-        onChange={onChange}
+        value={filter}
+        onChange={e => dispatch(changeFilter(e.target.value))}
       />
-      {/* </label> */}
       <Icon
         className={s.icon}
         width="16px"

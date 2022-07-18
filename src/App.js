@@ -13,15 +13,6 @@ import './index.css'
 
 export default function App() {
   return (
-    // <div
-    //   style={{
-    //     maxWidth: '1440px',
-    //     marginLeft: 'auto',
-    //     marginRight: 'auto',
-    //     paddingLeft: '40px',
-    //     paddingRight: '40px',
-    //   }}
-    // >
     <Routes>
       <Route path="/" element={<Navigation />}>
         <Route index element={<Navigate to="/students" />} />
@@ -33,6 +24,5 @@ export default function App() {
         <Route path="archive" element={<Archive />} />
       </Route>
     </Routes>
-    // </div>
   )
 }

@@ -10,7 +10,3 @@ async function fetchStudents(url = '', config = {}) {
 export function fetchStudentsData(page, size) {
   return fetchStudents(`${BASE_URL}?page=${page}&size=${size}`)
 }
-
-export function fetchAllStudents() {
-  return fetchStudents(`${BASE_URL}?page=1&size=20`)
-}
