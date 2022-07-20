@@ -7,6 +7,8 @@ async function fetchStudents(url = '', config = {}) {
     : Promise.reject(new Error('Not Found'))
 }
 
-export function fetchStudentsData(page, size) {
-  return fetchStudents(`${BASE_URL}?page=${page}&size=${size}`)
+export function fetchStudentsData(page, size, search, sortBy, sortDir) {
+  return fetchStudents(
+    `${BASE_URL}?page=${page}&size=${size}&sortBy=${sortBy}&sortDir=${sortDir}&search=${search}`,
+  )
 }

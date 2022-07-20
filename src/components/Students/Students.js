@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import TablePagination from '@mui/material/TablePagination'
 import * as API from 'services/api'
 import Headline from 'components/Headline/Headline'
@@ -11,32 +10,34 @@ export default function Students() {
   const [students, setStudents] = useState([])
   const [archive, setArchive] = useState([])
   const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
+  const [sortBy, setSortBy] = useState('')
+  const [sortDir, setSortDir] = useState(null)
   const [paginationPage, setPaginarionPage] = useState(0)
   const [size, setSize] = useState(5)
   const [totalCount, setTotalCount] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [selected, setSelected] = useState(false)
-  const { filter } = useSelector(state => state.filter)
 
   useEffect(() => {
-    API.fetchStudentsData(page, size)
+    API.fetchStudentsData(page, size, search, sortBy, sortDir)
       .then(response => {
-        setSize(response.data.length)
         setTotalCount(response.totalCount)
         setPage(page)
         setStudents(response.data)
       })
-      .catch(error => console.error())
-  }, [page, size])
+      .catch(error => console.log(error))
+  }, [page, size, search, sortBy, sortDir])
 
-  const filteredStudents = () => {
-    const normalizedFilter = filter.toLowerCase()
-    return students.filter(
-      student =>
-        student.name.toLowerCase().includes(normalizedFilter) ||
-        student.parents.join(', ').toLowerCase().includes(normalizedFilter) ||
-        student.id === Number(normalizedFilter),
-    )
+  const changeSort = sortByName => {
+    if (sortBy !== sortByName) {
+      setSortBy(sortByName)
+      setSortDir(1)
+    } else {
+      const newSortDir = sortDir === 1 ? -1 : 1
+      setSortBy(sortByName)
+      setSortDir(newSortDir)
+    }
   }
 
   const changeCheckbox = () => {
@@ -77,15 +78,14 @@ export default function Students() {
     })
     setStudents(newStudents)
   }
+
   const cancelArchive = index => {
     archive.splice(index, 1)
     const newStudents = archive.map(item => item)
-
     setArchive(newStudents)
   }
 
   const selectStudents = students.filter(student => student.selected)
-  const studentsFiltered = filteredStudents()
 
   return (
     <>
@@ -96,19 +96,19 @@ export default function Students() {
           toggleArchivedStudent={toggleArchivedStudent}
         />
       ) : (
-        <Headline />
+        <Headline changeFilter={setSearch} search={search} />
       )}
       <div className={s.container}>
-        {studentsFiltered.length > 0 ? (
+        {students.length > 0 ? (
           <>
             <SortableTable
-              studentsFiltered={studentsFiltered}
               changeCheckbox={changeCheckbox}
               checked={selected}
-              things={studentsFiltered}
+              students={students}
               toggleSelectStudent={toggleSelectStudent}
               archivedStudents={archive}
               cancelArchive={cancelArchive}
+              changeSort={changeSort}
             />
 
             <TablePagination

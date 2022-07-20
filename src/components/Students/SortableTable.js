@@ -2,27 +2,23 @@ import { useState } from 'react'
 import s from './Students.module.scss'
 import { nanoid } from 'nanoid'
 import StudentInfo from './StudentInfo'
-import sortTableData from 'helpers/sortTableData'
 import ArchivedTable from './ArchivedTable'
 export default function SortableTable({
   checked,
   changeCheckbox,
-  things,
+  students,
   toggleSelectStudent,
   archivedStudents,
   cancelArchive,
+  changeSort,
 }) {
-  const [sortedItems, setSortedItems] = useState(things)
   const [checkedbutton, setCheckedbutton] = useState(false)
-  const [direction, setDirection] = useState('ascending')
-  const [sortby, setSortby] = useState()
 
-  const handleClick = event => {
-    const sortDir = direction === 'descending' ? 'ascending' : 'descending'
-    setDirection(sortDir)
-    setSortby(event.target.id)
-    const sortConfig = { sortby: event.target.id, direction: sortDir }
-    setSortedItems(sortTableData(things, sortConfig))
+  const sortOptions = ['name', 'class', 'score', 'speed']
+  const handleClick = field => {
+    if (sortOptions.includes(field)) {
+      changeSort(field)
+    }
   }
 
   const showButtons = () => {
@@ -43,10 +39,8 @@ export default function SortableTable({
           </th>
           <th
             className={s.th}
-            onClick={handleClick}
-            direction={direction}
             id="name"
-            sortby={sortby}
+            onClick={e => handleClick(e.target.id)}
           >
             Name
           </th>
@@ -55,28 +49,22 @@ export default function SortableTable({
           </th>
           <th
             className={s.th}
-            direction={direction}
             id="class"
-            onClick={handleClick}
-            sortby={sortby}
+            onClick={e => handleClick(e.target.id)}
           >
             Class
           </th>
           <th
             className={s.th}
-            direction={direction}
             id="score"
-            onClick={handleClick}
-            sortby={sortby}
+            onClick={e => handleClick(e.target.id)}
           >
             Av.Score, %
           </th>
           <th
             className={s.th}
-            direction={direction}
             id="speed"
-            onClick={handleClick}
-            sortby={sortby}
+            onClick={e => handleClick(e.target.id)}
           >
             Av.Speed
           </th>
@@ -87,8 +75,8 @@ export default function SortableTable({
         </tr>
       </thead>
       <tbody className={s.tbody}>
-        {things &&
-          things.map(student => (
+        {students &&
+          students.map(student => (
             <StudentInfo
               key={nanoid()}
               tests={student.tests}
