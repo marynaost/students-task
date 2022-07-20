@@ -1,7 +1,10 @@
+import { useDispatch } from 'react-redux'
 import Icon from 'components/Icon'
 import s from './Filter.module.scss'
+import { changeFilter } from 'redux/selectSlice'
 
 export default function Filter({ search, onChange }) {
+  const dispatch = useDispatch()
   return (
     <div className={s.filterWrap}>
       <input
@@ -12,7 +15,10 @@ export default function Filter({ search, onChange }) {
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         value={search}
-        onChange={e => onChange(e.target.value)}
+        onChange={e => {
+          onChange(e.target.value)
+          dispatch(changeFilter(e.target.value))
+        }}
       />
       <Icon
         className={s.icon}
