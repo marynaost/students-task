@@ -5,6 +5,7 @@ import Headline from 'components/Headline/Headline'
 import SelectedStudent from 'components/SelectedStudent/SelectedStudent'
 import s from './Students.module.scss'
 import SortableTable from './SortableTable'
+import Loader from 'components/Loader/Loader'
 
 export default function Students() {
   const [students, setStudents] = useState([])
@@ -99,6 +100,7 @@ export default function Students() {
         <Headline changeFilter={setSearch} search={search} />
       )}
       <div className={s.container}>
+        {students === [] && <Loader />}
         {students.length > 0 ? (
           <>
             <SortableTable
@@ -127,7 +129,10 @@ export default function Students() {
             />
           </>
         ) : (
-          <h3 style={{ textAlign: 'center' }}> Sorry! Students not found</h3>
+          <>
+            <Loader />
+            <h3 style={{ textAlign: 'center' }}> Sorry! Students not found</h3>
+          </>
         )}
       </div>
     </>

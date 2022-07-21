@@ -15,6 +15,9 @@
 
 .th {
   text-align: left;
+  &:hover {
+    color: #a6192e;
+  }
 }
 
 thead .tr {
@@ -38,7 +41,14 @@ thead .tr {
   line-height: 1.4;
   border: none;
   background-color: #f2f2f2;
+
   &:not(:last-child) {
     margin-right: 8px;
+  }
+}
+
+.icon {
+  &:hover {
+    fill: #a6192e;
   }
 }

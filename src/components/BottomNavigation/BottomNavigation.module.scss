@@ -35,8 +35,14 @@
 
 .icon {
   margin-left: 4px;
+  &:hover {
+    fill: #a6192e;
+  }
 }
 
 .iconClear {
   margin-right: 6px;
+  &:hover {
+    fill: #a6192e;
+  }
 }
